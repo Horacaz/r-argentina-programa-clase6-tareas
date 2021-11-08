@@ -7,8 +7,8 @@ Punto bonus: Crear un botón para "empezar de nuevo" que empiece el proceso nuev
 */
 
 const $BOTON_CANTIDAD_INTEGRANTES = document.querySelector("#ingresar-integrantes");
-const $BOTON_CALCULAR = document.querySelector("#calcular");
-const $BOTON_REINICIAR_CAMPOS = document.querySelector("#reiniciar");
+const $BOTON_CALCULAR_EDAD = document.querySelector("#calcular-edad");
+const $BOTON_REINICIAR_EDAD = document.querySelector("#reiniciar-edad");
 
 $BOTON_CANTIDAD_INTEGRANTES.onclick = function () {
 
@@ -22,97 +22,111 @@ $BOTON_CANTIDAD_INTEGRANTES.onclick = function () {
         imprimirCantidadIntegrantes(i);
     }
 
-    mostrarBotonCalcular();
-    mostrarBotonReiniciarCampos();
+    mostrarBotonCalcularEdad();
 
     return false;
 }
 
 function imprimirCantidadIntegrantes(cantidadIntegrantes) {
 
-    const $div = document.createElement("div");
-    $div.className = "integrante";
+    const $divIntegrante = document.createElement("div");
+    $divIntegrante.className = "integrante";
 
-    const $label = document.createElement("label");
-    $label.textContent = `Nombre y edad del integrante #${cantidadIntegrantes + 1} `;
-
-
-    const $inputNombre = document.createElement("input");
-    $inputNombre.type = "text";
-    $inputNombre.classList ="nombre";
+    const $labelEdad = document.createElement("label");
+    $labelEdad.textContent = `Edad del integrante #${cantidadIntegrantes + 1} `;
 
     const $inputEdad = document.createElement("input");
     $inputEdad.type = "number";
     $inputEdad.classList = "edad";
 
-    $div.appendChild($label);
-    $div.appendChild($inputNombre);
-    $div.appendChild($inputEdad);
+    $divIntegrante.appendChild($labelEdad);
+    $divIntegrante.appendChild($inputEdad);
 
     const $divIntegrantes = document.querySelector("#integrantes")
-    $divIntegrantes.appendChild($div);
+    $divIntegrantes.appendChild($divIntegrante);
 
 
 }
 
-function mostrarBotonCalcular(){
-    $BOTON_CALCULAR.className = "";
-   
-}
-
-function mostrarBotonReiniciarCampos(){
-    $BOTON_REINICIAR_CAMPOS.className = "";
+function mostrarBotonCalcularEdad() {
+    document.querySelector("#calculo-edad").className = "";
 
 }
 
-$BOTON_CALCULAR.onclick = function(){
-
-    //const nombreIntegrantes = document.querySelectorAll(".nombre");
+$BOTON_CALCULAR_EDAD.onclick = function () {
 
     const edadIntegrantes = document.querySelectorAll(".edad");
 
-   mostrarMensajeMayorEdad(calcularMayorEdad(edadIntegrantes));
-   mostrarMensajeMenorEdad(calcularMenorEdad(edadIntegrantes));
-   mostrarMensajePromedio(calcularPromedio(edadIntegrantes));
+    mostrarMensajeMayorEdad(calcularMayorEdad(edadIntegrantes));
+    mostrarMensajeMenorEdad(calcularMenorEdad(edadIntegrantes));
+    mostrarMensajeEdadPromedio(calcularPromedio(edadIntegrantes));
 
- return false;
-}
-
-$BOTON_REINICIAR_CAMPOS.onclick = function(){
-    
-    const integrantes = document.querySelectorAll(".integrante");
-
-    for (i = 0; i < integrantes.length; i++){
-        integrante = document.querySelector(".integrante");
-        integrante.remove();
-    }
-
+    mostrarBotonIngresarSalario();
 
     return false;
 }
 
-function mostrarMensajeMayorEdad(calcularMayorEdad){
-   const mayorEdad = document.createElement("p");
-   document.querySelector("#integrantes").appendChild(mayorEdad);
+function mostrarMensajeMayorEdad(calcularMayorEdad) {
+    const mayorEdad = document.createElement("p");
+    document.querySelector("#integrantes").appendChild(mayorEdad);
     mayorEdad.textContent = `La mayor edad es de ${calcularMayorEdad} años.`
 
 }
 
-function mostrarMensajeMenorEdad(calcularMenorEdad){
+function mostrarMensajeMenorEdad(calcularMenorEdad) {
     const menorEdad = document.createElement("p");
     document.querySelector("#integrantes").appendChild(menorEdad);
     menorEdad.textContent = `La menor edad es de ${calcularMenorEdad} años.`
 
 }
 
-function mostrarMensajePromedio(calcularPromedio){
+function mostrarMensajeEdadPromedio(calcularPromedio) {
     const edadPromedio = document.createElement("p");
     document.querySelector("#integrantes").appendChild(edadPromedio);
     edadPromedio.textContent = `La edad promedio es de ${calcularPromedio} años.`
 
 }
 
+function mostrarBotonIngresarSalario() {
 
+    document.querySelector("#ingreso-salarios").className = "";
+    ocultarCalculoEdad();
+
+}
+
+$BOTON_REINICIAR_EDAD.onclick = function () {
+    reiniciarEdad()
+    ocultarCalculoEdad();
+    return false;
+}
+
+function reiniciarEdad() {
+
+    const integrantes = document.querySelectorAll(".integrante");
+
+    for (i = 0; i < integrantes.length; i++) {
+        const integrante = document.querySelector(".integrante");
+        integrante.remove();
+    }
+
+    const mensajes = document.querySelectorAll("p");
+    for (i = 0; i < mensajes.length; i++) {
+        const mensaje = document.querySelector("p");
+        mensaje.remove();
+    }
+
+    document.querySelector("#cantidad-integrantes").value = "";
+}
+
+function ocultarCalculoEdad() {
+    document.querySelector("#calculo-edad").className = "oculto";
+
+
+}
+
+function ocultarBotonIngresarSalario() {
+    document.querySelector("#ingreso-salarios").className = "oculto";
+}
 
 /*
 TAREA:
@@ -123,3 +137,133 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 */
 
 ////////////////////////////////////////////////////////////////
+
+const $BOTON_INGRESAR_SALARIO = document.querySelector("#ingresar-salario");
+const $BOTON_CALCULAR_SALARIO = document.querySelector("#calcular-salarios");
+const $BOTON_REINICIAR_SALARIOS = document.querySelector("#reiniciar-salarios");
+
+$BOTON_INGRESAR_SALARIO.onclick = function () {
+    ocultarBotonIngresarSalario()
+
+    const cantidadIntegrantes = document.querySelector("#cantidad-integrantes").value;
+
+    for (i = 1; i <= cantidadIntegrantes; i++) {
+        imprimirCantidadSalarioIngresar(i);
+    }
+
+    mostrarBotonCalularSalario();
+    mostrarBotonReiniciarSalario();
+
+    return false
+
+}
+
+function imprimirCantidadSalarioIngresar() {
+
+    const $divSalarios = document.querySelector("#salarios");
+
+    const $divSalarioIntegrante = document.createElement("div");
+    $divSalarioIntegrante.classList = "salario";
+
+    const $ingresarSalarioLabel = document.createElement("label");
+    $ingresarSalarioLabel.textContent = `Salario anual integrante #${i}`;
+
+    const $ingresarSalarioInput = document.createElement("input");
+    $ingresarSalarioInput.type = "number";
+    $ingresarSalarioInput.setAttribute("id", "salario-integrante");
+
+
+    $divSalarios.appendChild($divSalarioIntegrante);
+    $divSalarioIntegrante.appendChild($ingresarSalarioLabel);
+    $divSalarioIntegrante.appendChild($ingresarSalarioInput);
+
+}
+
+function mostrarBotonCalularSalario() {
+    $BOTON_CALCULAR_SALARIO.className = "";
+}
+
+function mostrarBotonReiniciarSalario() {
+    $BOTON_REINICIAR_SALARIOS.className = "";
+
+}
+
+
+$BOTON_CALCULAR_SALARIO.onclick = function () {
+    const salarios = document.querySelectorAll("#salario-integrante");
+
+    const salarioIntegrantes = [];
+
+    for (i = 0; i < salarios.length; i++) {
+        if (Number(salarios[i].value) == "" || 0) {
+            continue;
+        }
+
+        salarioIntegrantes.push(Number(salarios[i].value));
+    }
+
+    if (salarioIntegrantes == false) {
+        alert("No has ingresado los salarios anuales correctamente.");
+        return false;
+    }
+    mostrarMensajeMayorSalarioAnual(calcularMayorSalarioAnual(salarioIntegrantes));
+    mostrarMensajeMenorSalarioAnual(calcularMenorSalarioAnual(salarioIntegrantes));
+    mostrarMensajeSalarioMensualPromedio(calcularSalarioMensualPromedio(salarioIntegrantes));
+    mostrarMensajeSalarioAnualPromedio(calcularSalarioAnualPromedio(salarioIntegrantes));
+
+    return false;
+}
+
+$BOTON_REINICIAR_SALARIOS.onclick = function () {
+
+    reiniciarSalarios();
+    reiniciarEdad();
+    $BOTON_REINICIAR_SALARIOS.className = "oculto";
+    $BOTON_CANTIDAD_INTEGRANTES.className = "";
+    return false;
+}
+
+function reiniciarSalarios() {
+
+    const $salarios = document.querySelectorAll(".salario");
+
+    for (i = 0; i < $salarios.length; i++) {
+        const salario = document.querySelector(".salario");
+        salario.remove();
+    }
+
+    ocultarCalculoSalario();
+
+}
+
+function mostrarMensajeMayorSalarioAnual(calcularMayorSalarioAnual) {
+    const mayorSalarioAnual = document.createElement("p");
+    document.querySelector("#salarios").appendChild(mayorSalarioAnual);
+    mayorSalarioAnual.textContent = `El mayor salario anual es de $${calcularMayorSalarioAnual}.`
+
+}
+
+function mostrarMensajeMenorSalarioAnual(calcularMenorSalarioAnual) {
+    const menorSalarioAnual = document.createElement("p");
+    document.querySelector("#salarios").appendChild(menorSalarioAnual);
+    menorSalarioAnual.textContent = `El menor salario anual es de $${calcularMenorSalarioAnual}.`
+}
+
+function mostrarMensajeSalarioMensualPromedio(calcularSalarioMensualPromedio) {
+    const salarioMensualPromedio = document.createElement("p");
+    document.querySelector("#salarios").appendChild(salarioMensualPromedio);
+    salarioMensualPromedio.textContent = `El salario mensual promedio es de $${calcularSalarioMensualPromedio}.`
+}
+function mostrarMensajeSalarioAnualPromedio(calcularSalarioAnualPromedio) {
+
+    const salarioAnualPromedio = document.createElement("p");
+    document.querySelector("#salarios").appendChild(salarioAnualPromedio);
+    salarioAnualPromedio.textContent = `El salario anual promedio es de $${calcularSalarioAnualPromedio}.`
+}
+
+function ocultarCalculoSalario() {
+
+    $BOTON_CALCULAR_SALARIO.className = "oculto";
+    $BOTON_REINICIAR_SALARIOS.className = "oculto";
+
+}
