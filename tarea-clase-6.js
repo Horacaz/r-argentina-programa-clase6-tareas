@@ -151,7 +151,7 @@ $BOTON_INGRESAR_SALARIO.onclick = function () {
         imprimirCantidadSalarioIngresar(i);
     }
 
-    mostrarBotonCalularSalario();
+    mostrarBotonCalcularSalario();
     mostrarBotonReiniciarSalario();
 
     return false
@@ -179,7 +179,7 @@ function imprimirCantidadSalarioIngresar() {
 
 }
 
-function mostrarBotonCalularSalario() {
+function mostrarBotonCalcularSalario() {
     $BOTON_CALCULAR_SALARIO.className = "";
 }
 
@@ -187,7 +187,6 @@ function mostrarBotonReiniciarSalario() {
     $BOTON_REINICIAR_SALARIOS.className = "";
 
 }
-
 
 $BOTON_CALCULAR_SALARIO.onclick = function () {
     const salarios = document.querySelectorAll("#salario-integrante");
@@ -214,6 +213,32 @@ $BOTON_CALCULAR_SALARIO.onclick = function () {
     return false;
 }
 
+function mostrarMensajeMayorSalarioAnual(calcularMayorSalarioAnual) {
+    const mayorSalarioAnual = document.createElement("p");
+    document.querySelector("#salarios").appendChild(mayorSalarioAnual);
+    mayorSalarioAnual.textContent = `El mayor salario anual es de $${calcularMayorSalarioAnual}.`
+
+}
+
+function mostrarMensajeMenorSalarioAnual(calcularMenorSalarioAnual) {
+    const menorSalarioAnual = document.createElement("p");
+    document.querySelector("#salarios").appendChild(menorSalarioAnual);
+    menorSalarioAnual.textContent = `El menor salario anual es de $${calcularMenorSalarioAnual}.`
+}
+
+function mostrarMensajeSalarioMensualPromedio(calcularSalarioMensualPromedio) {
+    const salarioMensualPromedio = document.createElement("p");
+    document.querySelector("#salarios").appendChild(salarioMensualPromedio);
+    salarioMensualPromedio.textContent = `El salario mensual promedio es de $${calcularSalarioMensualPromedio}.`
+}
+
+function mostrarMensajeSalarioAnualPromedio(calcularSalarioAnualPromedio) {
+
+    const salarioAnualPromedio = document.createElement("p");
+    document.querySelector("#salarios").appendChild(salarioAnualPromedio);
+    salarioAnualPromedio.textContent = `El salario anual promedio es de $${calcularSalarioAnualPromedio}.`
+}
+
 $BOTON_REINICIAR_SALARIOS.onclick = function () {
 
     reiniciarSalarios();
@@ -234,31 +259,6 @@ function reiniciarSalarios() {
 
     ocultarCalculoSalario();
 
-}
-
-function mostrarMensajeMayorSalarioAnual(calcularMayorSalarioAnual) {
-    const mayorSalarioAnual = document.createElement("p");
-    document.querySelector("#salarios").appendChild(mayorSalarioAnual);
-    mayorSalarioAnual.textContent = `El mayor salario anual es de $${calcularMayorSalarioAnual}.`
-
-}
-
-function mostrarMensajeMenorSalarioAnual(calcularMenorSalarioAnual) {
-    const menorSalarioAnual = document.createElement("p");
-    document.querySelector("#salarios").appendChild(menorSalarioAnual);
-    menorSalarioAnual.textContent = `El menor salario anual es de $${calcularMenorSalarioAnual}.`
-}
-
-function mostrarMensajeSalarioMensualPromedio(calcularSalarioMensualPromedio) {
-    const salarioMensualPromedio = document.createElement("p");
-    document.querySelector("#salarios").appendChild(salarioMensualPromedio);
-    salarioMensualPromedio.textContent = `El salario mensual promedio es de $${calcularSalarioMensualPromedio}.`
-}
-function mostrarMensajeSalarioAnualPromedio(calcularSalarioAnualPromedio) {
-
-    const salarioAnualPromedio = document.createElement("p");
-    document.querySelector("#salarios").appendChild(salarioAnualPromedio);
-    salarioAnualPromedio.textContent = `El salario anual promedio es de $${calcularSalarioAnualPromedio}.`
 }
 
 function ocultarCalculoSalario() {
